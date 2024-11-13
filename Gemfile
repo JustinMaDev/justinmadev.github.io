@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rake'
+gem 'github-pages', group: :jekyll_plugins
+
 group :test do
   gem 'minitest', '>= 5.16.3'
   gem 'nokogiri', '>= 1.14.3'
@@ -10,8 +11,4 @@ group :test do
   gem 'rubocop', '>= 1.65.0'
 end
 
-gem 'jekyll'
-gem 'jekyll-polyglot'
-gem 'jekyll-paginate'
-gem 'jekyll-redirect-from'
 gem 'webrick', '>= 1.8.2'
