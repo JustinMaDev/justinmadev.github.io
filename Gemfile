@@ -10,7 +10,7 @@ group :test do
   gem 'rubocop', '>= 1.65.0'
 end
 
-gem 'jekyll'
+gem 'jekyll', '>= 4.3.0'
 gem 'jekyll-polyglot'
 gem 'jekyll-paginate'
 gem 'jekyll-redirect-from'
