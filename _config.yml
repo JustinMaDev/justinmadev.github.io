@@ -3,7 +3,6 @@ source:       .
 destination:  ./_site
 plugins_dir:  _plugins
 layouts_dir:  _layouts
-data_dir:     _data
 includes_dir: _includes
 collections:
   posts:
@@ -32,7 +31,7 @@ exclude: ['LICENSE.md', 'README.md', 'publi.sh', 'Gemfile.lock', 'Gemfile']
 title: Justin's Blog
 # tagline: 'Justin's Blog'
 description:
-  中文: 大道不过三两行
+  zh-CN: 大道不过三两行
   en: If I can't explan it simply, I don't understand it well enough.
 #url: https://polyglot.untra.io
 
@@ -46,7 +45,7 @@ github: https://github.com/JustinMaDev
 linkedin: https://www.linkedin.com/JustinMaDev
 
 #Polyglot
-languages: ["en", "中文"]
+languages: ["en", "zh-CN"]
 default_lang: "en"
 exclude_from_localization: ["javascript", "images", "css", "public"]
 parallel_localization: false
