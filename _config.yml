@@ -38,9 +38,6 @@ email: JustinMa@mail.com
 github: https://github.com/JustinMaDev
 linkedin: https://www.linkedin.com/JustinMaDev
 
-#Post Excerpt Length
-truncatewords: 50
-
 #Polyglot
 languages: ["en", "zh-CN"]
 default_lang: "en"

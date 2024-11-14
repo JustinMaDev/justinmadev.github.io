@@ -8,6 +8,8 @@ lang: zh-CN
 笔者一开始也有同样的感觉：C++20前三大都是“划时代”的改动：module改变了C++工程的组织模型，coroutine改变了C++并发的实现、concept则是模板编程自存在以来的最大变革，range到底带来了哪些改变，可位列于四大？
 因为他改变了循环的方式，或者说，他给循环提供了更高层的抽象
 
+<!--more-->
+
 ### 什么是Range?
 定义了begin()、end()迭代器的就算一个Range. Range共有两大类：Container与View. Container拥有begin() 、end() 所指向的数据，而view不拥有begin() 、end()所指向的数据，view更轻量、易于拷贝、移动。
 
@@ -81,8 +83,8 @@ std::ranges::filter_view与std::views::filter在功能上完全一致，只不�
 懒惰求值意味着，对view的那些操作仅在必要的时候才会执行，而不是马上全部执行。这些操作会被添加到一个pipline中。当我们遍历最view的时候才会最终执行那些操作，每个元素都会通过pipline进行传递，并返回最终结果。
 
 ### 标准库提供的views
-|views|作用描述  |
-|--|--|
+|views|作用描述|
+|-----|-------|
 | std::views::all | 从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view |
 |std::views::drop|从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view|
 |std::views::drop_while|从第一个元素开始， 一直drop,直到第一个不满足指定谓词的元素，然后返回剩下的元素的view

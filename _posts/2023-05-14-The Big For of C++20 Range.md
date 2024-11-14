@@ -3,10 +3,11 @@ layout: post
 title: "C++20 Big Four: Range"
 ---
 
-
 This article concludes the "Big Four" series of C++20. Many readers may wonder: what exactly is the "Ranges" feature that places it among the Big Four?
 
 Initially, I had the same question. The first three features in C++20 were "revolutionary": Modules transformed project organization, Coroutines redefined concurrency, and Concepts brought the biggest change to template programming since its inception. So, what makes Ranges deserving of the Big Four? It fundamentally changes the way we handle loops by providing a higher level of abstraction.
+
+<!--more-->
 
 ### What is a Range?
 

@@ -14,7 +14,13 @@ title: Home
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
-    {{ post.content | truncatewords: site.truncatewords  }}
+    {% if post.content contains '<!--more-->' %}
+      {{ post.content | split:'<!--more-->' | first }}
+    {% else %}
+      {{ post.excerpt }}
+    {% endif %}
+    
+    <a href="{{ post.url }}">Read more</a>
   </div>
   {% endfor %}
 </div>
