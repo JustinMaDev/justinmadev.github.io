@@ -15,11 +15,6 @@ lsi:         false
 excerpt_separator: "\n\n"
 incremental: false
 
-# data
-hello:
-  en: Hello!
-  zh-CN: 你好！
-
 plugins: [jekyll-polyglot, jekyll-paginate, jekyll-redirect-from]
 # Permalinks
 permalink: pretty
@@ -29,18 +24,17 @@ exclude: ['LICENSE.md', 'README.md', 'publi.sh', 'Gemfile.lock', 'Gemfile']
 
 # Setup
 title: Justin's Blog
-# tagline: 'Justin's Blog'
 description:
   zh-CN: 大道不过三两行
   en: If I can't explan it simply, I don't understand it well enough.
-#url: https://polyglot.untra.io
 
 paginate: 5
 # Custom vars
 version: 1.8.1
 # practical values langsep are "|", "•", "·", "-", "–"
-langsep: "•"
+langsep: "|"
 
+email: JustinMa@mail.com
 github: https://github.com/JustinMaDev
 linkedin: https://www.linkedin.com/JustinMaDev
 

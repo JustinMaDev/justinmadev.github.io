@@ -30,13 +30,17 @@
       <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
 
       <br><br><br><br><br><br>
+      <small><a class="sidebar-nav-item" href="mailto:{{ site.email }}">Email</a></small>
       <small><a class="sidebar-nav-item" href="{{ site.github }}">GitHub</a></small>
       <small><a class="sidebar-nav-item" href="{{ site.linkedin }}">LinkedIn</a></small>
       
       <!--<small class="sidebar-nav-item">Currently v{{ site.version }}</small>-->
     </nav>
 
-    <p><small>&copy; {{ site.time | date: '%Y' }} Justin Ma</small><br/><small>All rights reserved</small></p>
+    <p>
+      <small>&copy; {{ site.time | date: '%Y' }} Justin Ma</small><br/>
+      <small>All rights reserved</small>
+    </p>
 <p>
   <!-- jekyll-polyglot will process ferh= into href= through the static_href liquid block tag without relativizing the url; useful for making language navigation switchers  -->
   {% for tongue in site.languages %}
