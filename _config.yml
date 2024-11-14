@@ -26,17 +26,20 @@ exclude: ['LICENSE.md', 'README.md', 'publi.sh', 'Gemfile.lock', 'Gemfile']
 title: Justin's Blog
 description:
   zh-CN: 大道不过三两行
-  en: If I can't explan it simply, I don't understand it well enough.
+  en: If I can't explan it simply, I don't understand it deeply.
 
 paginate: 5
 # Custom vars
-version: 1.8.1
+version: 1.0
 # practical values langsep are "|", "•", "·", "-", "–"
 langsep: "|"
 
 email: JustinMa@mail.com
 github: https://github.com/JustinMaDev
 linkedin: https://www.linkedin.com/JustinMaDev
+
+#Post Excerpt Length
+truncatewords: 50
 
 #Polyglot
 languages: ["en", "zh-CN"]

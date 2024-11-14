@@ -4,13 +4,9 @@ title: About
 permalink: about/
 lang: en
 ---
-<p class="message">
-  <b>Polyglot</b> is an open source internationalization plugin for <a href="http://jekyllrb.com">Jekyll</a> blogs. Polyglot is easy to setup and use with any project, and it scales to the languages you want to support. With fallback support for missing content, automatic url relativization, and <a href="{{site.baseurl}}/seo/">powerful SEO recipes</a>, Polyglot allows any multi-language blog to focus on content without the cruftwork.
-</p>
 
-[**Polyglot Github Page**](https://github.com/untra/polyglot)
+# About this site 
+This is a bilingual(Engish and Chinese) blog hosted on GitHub Pages, built with [Jekyll](https://github.com/jekyll/jekyll), featuring the [Hyde](https://github.com/poole/hyde) theme and enhanced with the [Polyglot](https://github.com/untra/polyglot) plugin for multi-language support. Access the repository of this site [here](https://github.com/JustinMaDev/justinmadev.github.io).
 
-**Install**
-{% highlight bash %}
-gem install jekyll-polyglot
-{% endhighlight %}
+# About me
+A senior software engineer specializing in Windows client application and blockchain development, with expertise in modern C++, Rust, Python, Node.js, and Solidity.
