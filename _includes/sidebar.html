@@ -2,7 +2,7 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <p class="speech">{{ site.hello[site.active_lang]}}</p>
+      <!--<p class="speech">{{ site.hello[site.active_lang]}}</p>-->
     </br>
       <h1>
         <a href="{{ site.baseurl }}">
@@ -30,13 +30,14 @@
       {% endfor %}
       <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
 
-      <a class="sidebar-nav-item" href="https://rubygems.org/gems/jekyll-polyglot">Ruby Gem</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}/tree/master/site/{{ page.path }}"><small>view this page source on github</small></a>
-      <small class="sidebar-nav-item">Currently v{{ site.version }}</small>
+      <br><br><br><br><br><br>
+      <small><a class="sidebar-nav-item" href="{{ site.github }}">GitHub</a></small>
+      <small><a class="sidebar-nav-item" href="{{ site.linkedin }}">LinkedIn</a></small>
+      
+      <!--<small class="sidebar-nav-item">Currently v{{ site.version }}</small>-->
     </nav>
 
-    <p><small>&copy; {{ site.time | date: '%Y' }} Samuel Volin</small><br/><small>MIT Licensed</small></p>
+    <p><small>&copy; {{ site.time | date: '%Y' }} Justin Ma</small><br/><small>All rights reserved</small></p>
 <p>
   <!-- jekyll-polyglot will process ferh= into href= through the static_href liquid block tag without relativizing the url; useful for making language navigation switchers  -->
   {% for tongue in site.languages %}
