@@ -83,31 +83,35 @@ std::ranges::filter_view与std::views::filter在功能上完全一致，只不�
 懒惰求值意味着，对view的那些操作仅在必要的时候才会执行，而不是马上全部执行。这些操作会被添加到一个pipline中。当我们遍历最view的时候才会最终执行那些操作，每个元素都会通过pipline进行传递，并返回最终结果。
 
 ### 标准库提供的views
-|views|作用描述|
-|-----|-------|
-| std::views::all | 从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view |
-|std::views::drop|从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view|
-|std::views::drop_while|从第一个元素开始， 一直drop,直到第一个不满足指定谓词的元素，然后返回剩下的元素的view
-|std::views::filter|返回满足指定谓词的所有元素的view|std::views::join相当于把二维数组串成一维数组的一个view|
-|std::views::join_with|把二维数组串成一维数组的，并且在串联时安插指定的内容的一个view|
-|std::views::reverse|将元素倒序的view|
-|std::views::split|用指定的分隔符将一个view分割成多个view，并返回这些view，相当于join_with的逆操作|
-|std::views::take|第一个元素开始，take指定数量的元素的view|
-|std::views::take_while|第一个元素开始take，直到遇到第一个不满足指定谓词的元素，并返回take的元素的view|
-|std::views::transform|返回由指定函数转换的所有元素的view|
-|std::views::keys|采用由类似pair的值组成的view，并生成每个pair的第一个元素的view|
-|std::views::values|采用由类似pair的值组成的view，并生成每个pair的第二个元素的view|
-|std::views::elements|接受tuple-like数据组成的 view 和数值 N ，产生每个 tuple 的第 N 个元素的 view（相当于返回一个二维数组的第N个子数组，不过每个子数组必须是一个tuple）|
-|std::views::zip|view::elements的逆操作的view（相当于把多个子数组合并成一个二维数组）|
-|std::views::zip_transform|相当于把多个子数组合并成一个数组，合并的方式可以是add等等随意指定|
-|std::views::adjacent|相当于返回数组中所有连续N个值的所有组合的view|
-|std::views::adjacent_transform|比view::adjacent更进一步，可以指定对连续的N个值的操作，例如addstd::views::slide类似于adjacent，区别在于，adjacent只接受tuple-like的参数，且adjacent的N是编译期指定的，slide接受任何range,且N可以在运行期指定|
-|std::views::stride|接受一个view和一个数字 n， 从第一个元素开始，每隔n个元素取一个值|
-|std::views::chunk|接受一个view和一个数字 n， 从第一个元素开始，每n个元素作为一个块|
-|std::views::counted|类似view::take,区别在于take只能从第一个开始，counted可以指定起始位置|
-|std::views::common|把一个non_common_range转换为common_range,例如take_while就不是一个common_range,所以take_while的结果无法被某些算法直接使用|
-|std::views::as_const|生成对象的 const view|
-|std::views::as_rvalue|生成对象的 rvalue view|
+
+|       views           | 作用描述  |
+|-----------------------|-----------|
+| `std::views::all`     | 从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view |
+| `std::views::drop`    | 从第一个元素开始，drop指定数量的元素，然后返回剩余的元素的view |
+| `std::views::drop_while` | 从第一个元素开始， 一直drop,直到第一个不满足指定谓词的元素，然后返回剩下的元素的view |
+| `std::views::filter`  | 返回满足指定谓词的所有元素的view |
+| `std::views::join`    | 相当于把二维数组串成一维数组的一个view |
+| `std::views::join_with` | 把二维数组串成一维数组的，并且在串联时安插指定的内容的一个view |
+| `std::views::reverse` | 将元素倒序的view |
+| `std::views::split`   | 用指定的分隔符将一个view分割成多个view，并返回这些view，相当于join_with的逆操作 |
+| `std::views::take`    | 从第一个元素开始，take指定数量的元素的view |
+| `std::views::take_while` | 从第一个元素开始take，直到遇到第一个不满足指定谓词的元素，并返回take的元素的view |
+| `std::views::transform` | 返回由指定函数转换的所有元素的view |
+| `std::views::keys`    | 采用由类似pair的值组成的view，并生成每个pair的第一个元素的view |
+| `std::views::values`  | 采用由类似pair的值组成的view，并生成每个pair的第二个元素的view |
+| `std::views::elements` | 接受tuple-like数据组成的 view 和数值 N ，产生每个 tuple 的第 N 个元素的 view（相当于返回一个二维数组的第N个子数组，不过每个子数组必须是一个tuple） |
+| `std::views::zip`     | view::elements的逆操作的view（相当于把多个子数组合并成一个二维数组） |
+| `std::views::zip_transform` | 相当于把多个子数组合并成一个数组，合并的方式可以是add等等随意指定 |
+| `std::views::adjacent` | 相当于返回数组中所有连续N个值的所有组合的view |
+| `std::views::adjacent_transform` | 比view::adjacent更进一步，可以指定对连续的N个值的操作，例如add |
+| `std::views::slide`   | 类似于adjacent，区别在于，adjacent只接受tuple-like的参数，且adjacent的N是编译期指定的，slide接受任何range,且N可以在运行期指定 |
+| `std::views::stride`  | 接受一个view和一个数字 n， 从第一个元素开始，每隔n个元素取一个值 |
+| `std::views::chunk`   | 接受一个view和一个数字 n， 从第一个元素开始，每n个元素作为一个块 |
+| `std::views::counted` | 类似view::take,区别在于take只能从第一个开始，counted可以指定起始位置 |
+| `std::views::common`  | 把一个non_common_range转换为common_range,例如take_while就不是一个common_range,所以take_while的结果无法被某些算法直接使用 |
+| `std::views::as_const` | 生成对象的 const view |
+| `std::views::as_rvalue` | 生成对象的 rvalue view |
+
 
 参考资料：
 
