@@ -1,0 +1,29 @@
+/* Custom code block styles
+ *
+ * Set the maximum height of code blocks to 300px and add a scrollbar 
+ * if the content exceeds the maximum height.
+ * NOTE: Since the Mermaid plugin alse uses the <pre> tag to render diagrams, 
+ * so we need to exclude it from this style.
+ */
+ pre:not([class_name="language-mermaid"]) {
+  max-height: 300px; 
+  overflow: auto;  
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Custom table styles
+ *
+ * Set the maximum height of tables to 600px and add a Y-axis scrollbar 
+ * if the content exceeds the maximum height.
+ */
+table {
+  display: block;
+  max-height:600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: normal;
+  text-align: left;
+}

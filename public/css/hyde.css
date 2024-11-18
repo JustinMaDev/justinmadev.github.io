@@ -124,13 +124,14 @@ a.sidebar-nav-item:focus {
 .content {
   padding-top:    4rem;
   padding-bottom: 4rem;
+  text-align:     justify;
 }
 
 @media (min-width: 48em) {
   .content {
     max-width: 44rem;
     margin-left: 24rem;
-    margin-right: 2rem;
+    margin-right: 4rem;
   }
 }
 
@@ -138,10 +139,9 @@ a.sidebar-nav-item:focus {
   .content {
     max-width: 60rem;
     margin-left: 24rem;
-    margin-right: 2rem;
+    margin-right: 4rem;
   }
 }
-
 
 /*
  * Reverse layout

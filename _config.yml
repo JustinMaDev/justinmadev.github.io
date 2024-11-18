@@ -24,7 +24,6 @@ exclude: ['LICENSE.md', 'README.md', 'publi.sh', 'Gemfile.lock', 'Gemfile']
 
 # Setup
 hyde_theme_id: theme-base-07  # black theme
-code_block_max_height: 300px  # code block max height, scroll if exceed
 
 title: Justin's Blog
 description:
