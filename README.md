@@ -10,3 +10,25 @@ This is a bilingual personal blog repository built with [Jekyll](https://github.
 **Code**: The code for this blog, including themes, styles, etc., is open-sourced under the MIT License. 
 
 **Content**: All blog content (located in the _posts folder) is copyright-protected and may not be copied or distributed without permission.
+
+# How to run
+Make sure you have installed `ruby`, `jekyll` and `bundle`
+```
+ruby -v
+jekyll -v
+bundle -v
+```
+Install them if not:
+```
+gem install jekyll bundler
+```
+Install the dependency:
+```
+bundle install
+```
+Then run:
+```
+jekyll serve
+```
+
+
