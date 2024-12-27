@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Developing on Solana：From Native to Anchor"
+title: "Solana合约开发：从原生到Anchor"
 lang: zh-CN
 ---
 

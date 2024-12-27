@@ -6,12 +6,37 @@
  * so we need to exclude it from this style.
  */
  pre:not([class_name="language-mermaid"]) {
+  position: relative; /* Required for positioning the copy button */
   max-height: 300px; 
   overflow: auto;  
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   padding: 10px;
   border-radius: 5px;
+}
+
+/* Copy button styles */
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #B0B0B0;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: #808080;
+}
+
+/* Prevent Mermaid diagrams from being affected */
+pre:not([class_name="language-mermaid"]) > code {
+  display: block;
 }
 
 /* Custom table styles

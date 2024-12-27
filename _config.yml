@@ -19,7 +19,7 @@ plugins: [jekyll-polyglot, jekyll-paginate, jekyll-redirect-from]
 # Permalinks
 permalink: pretty
 
-include: ['_pages']
+include: []
 exclude: ['LICENSE.md', 'README.md', 'publi.sh', 'Gemfile.lock', 'Gemfile']
 
 # Setup

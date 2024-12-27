@@ -27,20 +27,9 @@
 
   <!-- Mermaid -->
   <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () { 
-      mermaid.initialize({
-        startOnLoad: true,
-        theme: "base",
-      });
-
-      const mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
-      mermaidBlocks.forEach((block) => {
-        // Add 'class_name' marker to pre lable. This is used to identify mermaid blocks in custom.css
-        block.parentElement.setAttribute('class_name', 'language-mermaid'); 
-      });
-
-      mermaid.init(undefined, mermaidBlocks);
-    });
-  </script>
+  <!-- Mark the pre from mermaid plugin, so the custom.css can apply max-height attruibute to code block-->
+  <script src="/assets/scripts/mermaid_mark.js"></script>
+  <!-- Add Copy button to code block -->
+  <script src="/assets/scripts/copy_button.js"></script>
+  
 </head>
