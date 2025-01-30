@@ -28,7 +28,7 @@ bundle install
 ```
 Then run:
 ```
-jekyll serve
+bundle exec jekyll serve
 ```
 
 
