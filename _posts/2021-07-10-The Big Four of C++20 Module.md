@@ -1,14 +1,16 @@
 ---
 layout: post
 title: "The Big Four of C++20: Module"
+lang: en
 ---
 
-# <center> Preface </center>
+# Preface
 
 **What is the most significant feature of C++20?**  
 —The most significant feature is that, to date, no compiler has fully implemented all its features.  
 
 ![](/assets/images/20210710_1.png)  
+<!--more--> 
 
 The C++20 standard was finalized long ago, and major compilers have already adopted most of its features. However, as of **July 2021**, no compiler has achieved complete support for all C++20 features. Some argue that C++20 represents the largest overhaul since C++11—perhaps even surpassing it in scope.  
 
@@ -17,61 +19,45 @@ This article focuses solely on **modules**, one of the four major features intro
 2. **Using C++20 Modules**: A practical guide to adopting the module mechanism.  
 3. **Behind the Scenes of Modules**: Analyzing their inner workings, pros and cons, and current compiler support status.  
 
-<!--more--> 
 
-# <center> (I) The Origins of Header Files </center>
 
-> * **1. C++ Inherits from C**: It not only adopted C's syntax but also inherited its compilation and linking model.  
-> * **2. Early 1973: C Takes Shape**:  
->   - The C language stabilized with features like preprocessing and struct support.  
->   - The compilation model (preprocess → compile → assemble → link) was established and remains unchanged.  
->   - In 1973, **K&R rewrote the Unix kernel in C**, cementing the language's practicality.  
-> * **3. Why Preprocessing? Why Header Files?**  
-> * **4. Hardware Constraints of the 1970s**:  
->   The **PDP-11** (the machine used to run early C compilers) had:  
->   - **Memory**: 64 KiB  
->   - **Storage**: 512 KiB  
->   To accommodate these limitations, C compilers were designed for **modular compilation**:  
->   - Split source code into smaller files for one-pass compilation (scan once, generate object code immediately, no backtracking).  
->   - Link object files into a final executable.  
->   
+# (I) The Origins of Header Files
+
+**1. C++ Inherits from C**: It not only adopted C's syntax but also inherited its compilation and linking model.  
+**2. Early 1973: C Takes Shape**:  The C language stabilized with features like preprocessing and struct support. The compilation model (preprocess → compile → assemble → link) was established and remains unchanged. In 1973, **K&R rewrote the Unix kernel in C**, cementing the language's practicality.  
+**3. Why Preprocessing? Why Header Files?**  
+**4. Hardware Constraints of the 1970s**:  The **PDP-11** (the machine used to run early C compilers) had: **Memory**: 64 KiB **Storage**: 512 KiB. To accommodate these limitations, C compilers were designed for **modular compilation**:  Split source code into smaller files for one-pass compilation (scan once, generate object code immediately, no backtracking). Link object files into a final executable.  
 >   **One-pass compilation** led to key C language traits:  
 >   - **A. Structs Must Be Defined Before Use**: To determine member types/offsets for code generation.  
 >   - **B. Local Variables Declared First**: Required to allocate stack space upfront.  
 >   - **C. External Variables**: Only declarations (name + type) are needed; addresses resolved by the linker.  
->   - **D. External Functions**: Declarations (name + signature) suffice; addresses resolved by the linker.  
-> * **5. Header Files & Preprocessing**:  
->   - Header files provided **declarations** (function prototypes, structs) in a minimal format.  
->   - Preprocessing expanded headers into source files, enabling seamless one-pass compilation.  
+>   - **D. External Functions**: Declarations (name + signature) suffice; addresses resolved by the linker. 
+
+**5. Header Files & Preprocessing**:  Header files provided **declarations** (function prototypes, structs) in a minimal format. Preprocessing expanded headers into source files, enabling seamless one-pass compilation.  
 
 ---
 
 ### **The Dark Side of Header Files**  
 While essential, headers introduced significant drawbacks:  
-> * **Inefficiency**:  
->   Headers perform **textual inclusion** (no syntax filtering), bloating source files with unused declarations.  
-> * **Transitive Pollution**:  
->   Macros/variables in deeply nested headers can "leak" upward via intermediate includes.  
-> * **Slow Compilation**:  
->   If `a.h` is included by three modules, it is expanded and parsed **three times**.  
-> * **Order Sensitivity**:  
->   Program behavior depends on header inclusion order (especially critical for C++ overload resolution).  
-> * **Non-Determinism**:  
->   The same header may behave differently across source files due to:  
+1. **Inefficiency**: Headers perform **textual inclusion** (no syntax filtering), bloating source files with unused declarations.  
+2. **Transitive Pollution**: Macros/variables in deeply nested headers can "leak" upward via intermediate includes.  
+3. **Slow Compilation**: If `a.h` is included by three modules, it is expanded and parsed **three times**.  
+4. **Order Sensitivity**: Program behavior depends on header inclusion order (especially critical for C++ overload resolution).  
+5. **Non-Determinism**: The same header may behave differently across source files due to:  
 >   - Other included headers.  
 >   - Macro definitions in the source.  
 >   - Compiler flags.  
-> * **Interface-Implementation Split**:  
->   Headers enforce separation of declarations (.h) and implementations (.cpp), promoting modular design but risking inconsistencies.  
+6. **Interface-Implementation Split**: Headers enforce separation of declarations (.h) and implementations (.cpp), promoting modular design but risking inconsistencies.  
 
 ---
 
 **C++20 Modules** aim to address these issues. We'll first explore their usage and then analyze how they improve upon headers.  
 
-# <center> (II) Using Modules </center>
+# (II) Using Modules
 
 ###### 2.1 Implementing a Minimal Module  
 **module_hello.cppm**: Defines a complete **hello** module and exports the **say_hello_to** function. Current compilers don't enforce module file extensions; we use **.cppm** here. This file is called a **module interface file** and can contain both declarations and definitions.  
+
 ~~~cpp
 // module_hello.cppm
 export module hello;
@@ -86,7 +72,8 @@ export void say_hello_to(const std::string_view& something) {
 }
 ~~~
 
-**main.cpp** uses the module directly:  
+**main.cpp** uses the module directly: 
+
 ~~~cpp
 // main.cpp
 import hello;
@@ -122,6 +109,7 @@ $CXX -o hello -fprebuilt-module-path=. main.cpp module_hello.cpp
 For larger modules, split declarations and implementations:  
 
 **module_hello.cppm** (interface):  
+
 ~~~cpp
 export module hello;
 import <iostream>;
@@ -134,7 +122,8 @@ export void func_a();
 export void func_b();
 ~~~
 
-**module_hello.cpp** (implementation):  
+**module_hello.cpp** (implementation): 
+
 ~~~cpp
 module hello;
 void internal_helper() { /* ... */ }
@@ -157,6 +146,7 @@ void func_b() { /* ... */ }
 
 ###### 2.3 Visibility Control  
 To expose dependencies transitively, use `export import`:  
+
 ~~~cpp
 // module_hello.cppm
 export module hello;
@@ -177,6 +167,7 @@ int main() {
 Organize large modules hierarchically:  
 
 **module_hello.cppm** (aggregates submodules):  
+
 ~~~cpp
 export module hello;
 export import hello.sub_a;
@@ -184,6 +175,7 @@ export import hello.sub_b;
 ~~~
 
 **Submodule interface (hello.sub_a)**:  
+
 ~~~cpp
 // module_hello_sub_a.cppm
 export module hello.sub_a;
@@ -191,6 +183,7 @@ export void func_a();
 ~~~
 
 **Submodule implementation**:  
+
 ~~~cpp
 // module_hello_sub_a.cpp
 module hello.sub_a;
@@ -207,6 +200,7 @@ void func_a() { /* ... */ }
 Split modules internally using **partitions**:  
 
 **Implementation Partition** (split implementation logic):  
+
 ~~~cpp
 // module_hello_partition_internal.cpp
 module hello:internal;
@@ -214,6 +208,7 @@ void internal_helper() { /* ... */ }
 ~~~
 
 **Primary module implementation**:  
+
 ~~~cpp
 // module_hello.cpp
 module hello;
@@ -224,13 +219,15 @@ void func_b() { internal_helper(); /* ... */ }
 ~~~
 
 **Interface Partition** (split declarations):  
+
 ~~~cpp
 // module_hello_partition_a.cppm
 export module hello:partition_a;
 export void func_a() { /* ... */ }
 ~~~
 
-**Primary interface file**:  
+**Primary interface file**: 
+
 ~~~cpp
 // module_hello.cppm
 export module hello;
@@ -247,6 +244,7 @@ export :partition_b;
 
 ###### 2.6 Global Module Fragments  
 Integrate legacy code using the global module:  
+
 ~~~cpp
 module;  // Start global fragment
 #include <cmath>  // Include non-module headers
@@ -259,7 +257,8 @@ export void func_a() { /* ... */ }
 ---
 
 ###### 2.7 Module Maps (Clang Example)  
-Map traditional headers to modules via **module.modulemap**:  
+Map traditional headers to modules via **module.modulemap**: 
+
 ~~~cpp
 // module.modulemap
 module A { header "a.h"; export *; }
@@ -268,6 +267,7 @@ module iostream { header "iostream"; export *; }
 ~~~
 
 **Compilation**:  
+
 ~~~sh
 clang -cc1 -emit-module -o A.pcm -fmodules module.modulemap -fmodule-name=A
 clang -cc1 -emit-module -o iostream.pcm -fmodules module.modulemap -fmodule-name=iostream
@@ -282,7 +282,8 @@ clang -cc1 -emit-obj main.cpp -fmodules -fmodule-map-file=module.modulemap \
 ---
 
 ###### 2.8 Modules vs. Namespaces  
-Modules and namespaces are orthogonal concepts:  
+Modules and namespaces are orthogonal concepts:
+  
 ~~~cpp
 // module_hello.cppm
 export module hello;
@@ -297,7 +298,7 @@ int main() { hello::say_hello(); }
 
 --- 
 
-# <center> (III) Summary </center>
+# (III) Summary
 
 Finally, compared to the drawbacks of header files outlined earlier, modules offer these advantages:  
 > * **No Redundant Compilation**:  

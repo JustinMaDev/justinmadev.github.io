@@ -30,7 +30,7 @@ description:
   zh-CN: 大道不过三两行
   en: If I can't explan it simply, I don't understand it deeply.
 
-paginate: 5
+paginate: 50
 # Custom vars
 version: 1.0
 # practical values langsep are "|", "•", "·", "-", "–"
